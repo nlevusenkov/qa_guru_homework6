@@ -16,7 +16,7 @@ def test_downlodad_pdf():
         "download.prompt_for_download": False
     }
     options.add_experimental_option("prefs", prefs)
-
+    options.add_argument("--headless=new")
     driver = webdriver.Chrome(
         service=Service(ChromeDriverManager().install()),
         options=options
