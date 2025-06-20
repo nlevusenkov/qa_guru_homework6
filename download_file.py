@@ -24,7 +24,6 @@ def test_downlodad_pdf():
     browser.config.driver = driver
     # Скачивание pdf
     browser.open('https://www.online-convert.com/ru/file-type')
-    browser.config.timeout = 10
     browser.element("#file-format-search").type('pdf')
     browser.element('a[href="https://www.online-convert.com/ru/file-format/pdf"]').click()
     download_url = browser.element('a[href="https://example-files.online-convert.com/document/pdf/example.pdf"]').get(query.attribute("href"))
