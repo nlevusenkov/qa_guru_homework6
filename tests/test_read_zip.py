@@ -5,7 +5,7 @@ import PyPDF2
 from io import BytesIO, TextIOWrapper
 from openpyxl import load_workbook
 import csv
-def test_read_zip():
+def test_read_zip(operations_with_archive):
     with ZipFile(os.path.join(TMP_DIR, 'test_zip.zip')) as zip_file: # открываем архив
         pdf_data = zip_file.read('example.pdf')
         pdf_reader = PyPDF2.PdfReader(BytesIO(pdf_data))
@@ -31,14 +31,10 @@ def test_read_zip():
             csv_reader = csv.reader(lines)
 
             # Ищем строку с Purpose
-            purpose_found = False
             for row in csv_reader:
                 if len(row) > 1 and row[0].strip() == 'Purpose:':
                     assert row[1].strip() == 'Provide example file for this type'
-                    purpose_found = True
-                    break
 
             # Дополнительные проверки структуры файла
-            lines = content.splitlines()  # Читаем заново
             assert 'Month,Cecilia,Patty,Robert,Frank,total'
             assert '"$5,00","$5,00","$7,00","$25,00","$42,00"'
